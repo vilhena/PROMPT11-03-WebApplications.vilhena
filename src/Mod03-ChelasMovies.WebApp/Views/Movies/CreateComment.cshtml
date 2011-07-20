@@ -29,7 +29,7 @@
             @Html.EditorFor(model => model.Rating)
             @Html.ValidationMessageFor(model => model.Rating)
         </div>
-            @Html.HiddenFor(model => model.MovieID)
+            @Html.HiddenFor(model => model.Movie.ID)
         <p>
             <input type="submit" value="Create" />
         </p>

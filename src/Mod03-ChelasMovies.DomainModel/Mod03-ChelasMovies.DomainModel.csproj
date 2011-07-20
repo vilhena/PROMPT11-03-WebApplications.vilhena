@@ -52,6 +52,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,11 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="CommentDbContext.cs" />
+    <Compile Include="DBContext.cs" />
+    <Compile Include="ServicesImpl\RepositoryService.cs" />
+    <Compile Include="ServicesImpl\RepositoryCommentsService.cs" />
     <Compile Include="ServicesImpl\RepositoryMoviesService.cs" />
     <Compile Include="ServicesImpl\EFMoviesService.cs" />
     <Compile Include="ServicesImpl\InMemoryMoviesService.cs" />
+    <Compile Include="ServicesRepositoryInterfaces\ICommentsRepository.cs" />
     <Compile Include="ServicesRepositoryInterfaces\IMoviesRepository.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\ICommentsService.cs" />
     <Compile Include="Services\IMoviesService.cs" />
     <Compile Include="Movie.cs" />
     <Compile Include="MovieDBContext.cs" />

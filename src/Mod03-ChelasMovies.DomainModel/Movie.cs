@@ -4,12 +4,21 @@ namespace Mod03_ChelasMovies.DomainModel
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
 
     public class Movie
     {
+        public Movie()
+        {
+            Year = DateTime.Now.Year;
+        }
+
+        [HiddenInput]
+        [ScaffoldColumn(false)]
         public int ID { get; set; }
 
         [Required]
+        [MaxLength(128)]  
         public string Title { get; set; }
 
         [Required]
@@ -20,7 +29,11 @@ namespace Mod03_ChelasMovies.DomainModel
         public string Actors { get; set; }
         public string Image { get; set; }
         public TimeSpan Runtime { get; set; }
-        //public string Xpto1 { get; set; }
+        //public DateTime Xpto { get; set; }
+
+        //[ScaffoldColumn(false)]
+        //public string Hidden { get; set; }
+
         
         //[StringLength(5)]
 

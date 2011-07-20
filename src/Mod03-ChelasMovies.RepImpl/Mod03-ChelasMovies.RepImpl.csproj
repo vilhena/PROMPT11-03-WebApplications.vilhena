@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EFIRepository.cs" />
+    <Compile Include="EFICommentsRepository.cs" />
     <Compile Include="EFIMDBAPIMoviesRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TheIMDbAPI.cs" />

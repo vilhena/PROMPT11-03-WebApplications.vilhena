@@ -1,5 +1,5 @@
-[assembly: WebActivator.PreApplicationStartMethod(typeof(Mod03_ChelasMovies.DependencyResolution.App_Start.NinjectMVC3), "Start")]
-[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Mod03_ChelasMovies.DependencyResolution.App_Start.NinjectMVC3), "Stop")]
+//[assembly: WebActivator.PreApplicationStartMethod(typeof(Mod03_ChelasMovies.DependencyResolution.App_Start.NinjectMVC3), "Start")]
+//[assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Mod03_ChelasMovies.DependencyResolution.App_Start.NinjectMVC3), "Stop")]
 
 namespace Mod03_ChelasMovies.DependencyResolution.App_Start
 {

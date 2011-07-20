@@ -1,11 +1,13 @@
-﻿@model Mod03_ChelasMovies.DomainModel.Movie
+﻿@using Mod03_ChelasMovies.WebApp.Models
+
+@model Mod03_ChelasMovies.DomainModel.Movie
 
 @{
     ViewBag.Title = "Details";
 }
-
 <h2>Details</h2>
 
+@Html.ActionLink("Edit", "Edit", new { id=Model.ID })
 <fieldset>
     <legend>Movie</legend>
 
@@ -25,7 +27,8 @@
     <div class="display-field">@Model.Actors</div>
 
     <div class="display-label">Image</div>
-    <div class="display-field">@Model.Image</div>
+    @*<div class="display-field">@Model.Image</div>*@
+    <div class="display-image">@Html.ImageLink(@Model.Image, @Model.Title)</div>
 
     <div class="display-label">Runtime</div>
     <div class="display-field">@Model.Runtime</div>

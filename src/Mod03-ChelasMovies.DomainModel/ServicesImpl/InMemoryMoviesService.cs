@@ -4,11 +4,19 @@ using Mod03_ChelasMovies.DomainModel.Services;
 
 namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
 {
+    using System.Threading;
+
     public class InMemoryMoviesService : IMoviesService
     {
-        public ICollection<Movie> GetAllMovies()
+        static List<Movie> movies;
+        static List<Comment> comments;
+        static int newId;
+
+
+        static InMemoryMoviesService()
         {
-            var movies = new List<Movie>
+
+            movies = new List<Movie>
                              {
 
                                  new Movie
@@ -28,9 +36,17 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
                                          Year = 2002,
                                          Comments = new List<Comment>()
                                      },
+                                 new Movie
+                                     {
+                                         ID = 3,
+                                         Title = "Ninja das Caldas",
+                                         Genre = "Comedy",
+                                         Year = 2000,
+                                         Comments = new List<Comment>()
+                                     },
                              };
 
-            var comments = new List<Comment>
+        comments = new List<Comment>
                                {
                                    new Comment
                                        {
@@ -59,12 +75,24 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
                                        },
 
                                };
+
+        newId = movies.Count;
+
+        }
+
+        public ICollection<Movie> GetAllMovies()
+        {
             return movies;
+        }
+
+        public ICollection<Movie> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         public Movie Get(int id)
         {
-            foreach (Movie m in GetAllMovies()) {
+            foreach (Movie m in movies) {
                 if (m.ID == id) return m;
             }
             return null;
@@ -77,7 +105,8 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
 
         public void Add(Movie newMovie)
         {
-            throw new NotImplementedException();
+            newMovie.ID = Interlocked.Increment(ref newId);
+            movies.Add(newMovie);
         }
 
         public void Update(Movie movie)
@@ -91,6 +120,21 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
         }
 
         public Movie Search(string title)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fill(Movie movie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FillWithIMDB(Movie movie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteComment(int movieId, int id)
         {
             throw new NotImplementedException();
         }

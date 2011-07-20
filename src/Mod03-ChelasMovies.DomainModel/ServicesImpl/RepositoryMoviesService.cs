@@ -6,63 +6,66 @@ using Mod03_ChelasMovies.DomainModel.ServicesRepositoryInterfaces;
 
 namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
 {
-    public class RepositoryMoviesService : IMoviesService
+    public class RepositoryMoviesService : RepositoryService<Movie>, IMoviesService
     {
         private readonly IMoviesRepository _moviesRepository;
+        private readonly ICommentsService _commentsService;
 
-        public RepositoryMoviesService(IMoviesRepository moviesRepository)
+        public RepositoryMoviesService(IMoviesRepository moviesRepository, ICommentsService commentsService)
+            : base(moviesRepository)
         {
             _moviesRepository = moviesRepository;
+            _commentsService = commentsService;
         }
 
         public ICollection<Movie> GetAllMovies()
         {
-            return _moviesRepository.GetAll().ToList();
+            return GetAll();
         }
 
-        public Movie Get(int id)
-        {
-            return _moviesRepository.Get(id);
-        }
 
         public Movie GetWithComments(int id)
         {
             return _moviesRepository.Get(id);
         }
 
-        public void Add(Movie newMovie)
-        {
-            _moviesRepository.Add(newMovie);
-            _moviesRepository.Save();
-        }
-
-        public void Update(Movie movie)
-        {
-            _moviesRepository.Save();
-        }
-
-        public void Delete(int id)
-        {
-            try
-            {
-                _moviesRepository.Delete(id);
-                _moviesRepository.Save();
-            }
-            catch (Exception e)
-            {
-                throw new ArgumentException(String.Format("Movie with id {0} could not be found", id), "id", e);
-            }
-
-        }
-
         public Movie Search(string title)
         {
-            throw new NotImplementedException();
+            return _moviesRepository.Search(title);
         }
 
-        public void Dispose()
+        public void Fill(Movie movie)
+        {
+            var imdbMovie = Search(movie.Title);
+            if (imdbMovie != null)
+            {
+                movie.Title = imdbMovie.Title;
+                movie.Year = imdbMovie.Year;
+                movie.Genre = imdbMovie.Genre;
+                movie.Actors = imdbMovie.Actors;
+                movie.Runtime = imdbMovie.Runtime;
+                movie.Director = imdbMovie.Director;
+                movie.Image = imdbMovie.Image;
+            }
+        }
+
+        public void DeleteComment(int movieId, int id)
+        {
+            
+            var movie =_moviesRepository.Get(movieId);
+            var comment = movie.Comments.FirstOrDefault(c => c.ID == id);
+
+            if (comment == null)
+                throw new InvalidOperationException("");
+
+            _commentsService.Delete(comment.ID);
+            Update(movie);
+        }
+
+        public new void Dispose()
         {
             _moviesRepository.Dispose();
         }
+
     }
 }

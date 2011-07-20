@@ -8,8 +8,8 @@ namespace Mod03_ChelasMovies.WebApp.Models {
     using DomainModel;
 
     public class MoviesInitializer : 
-        DropCreateDatabaseAlways<MovieDbContext>
-        //DropCreateDatabaseIfModelChanges<MovieDbContext>
+        //DropCreateDatabaseAlways<MovieDbContext>
+        DropCreateDatabaseIfModelChanges<MovieDbContext>
     {
         protected override void Seed(MovieDbContext context)
         {

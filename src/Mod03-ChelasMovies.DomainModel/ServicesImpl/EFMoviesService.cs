@@ -19,6 +19,11 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
             return _movieDbContext.Movies.ToList();
         }
 
+        public ICollection<Movie> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public Movie Get(int id)
         {
             return _movieDbContext.Movies.Find(id);
@@ -53,6 +58,21 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
         }
 
         public Movie Search(string title)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Fill(Movie movie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FillWithIMDB(Movie movie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteComment(int movieId, int id)
         {
             throw new NotImplementedException();
         }
