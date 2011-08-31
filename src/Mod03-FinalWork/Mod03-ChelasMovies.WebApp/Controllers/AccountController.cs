@@ -6,11 +6,27 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Mod03_ChelasMovies.WebApp.Models;
+using Mod03_ChelasMovies.DomainModel.Services;
 
 namespace Mod03_ChelasMovies.WebApp.Controllers
 {
     public class AccountController : Controller
     {
+
+        private readonly IUserService _userService;
+
+        public AccountController(IUserService userService)
+        {
+            
+            _userService = userService;
+        }
+
+
+        public ActionResult Index()
+        {
+            return View(_userService.GetAuthenticatedUser(User.Identity.Name));
+        }
+
 
         //
         // GET: /Account/LogOn
@@ -84,6 +100,14 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
                 if (createStatus == MembershipCreateStatus.Success)
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
+                    
+                    //Saves application User Data
+                    var newUser = new DomainModel.Domain.User();
+                    newUser.Username = model.UserName;
+                    newUser.Name = model.Name;
+                    newUser.NickName = model.NickName;
+                    _userService.Add(newUser);
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

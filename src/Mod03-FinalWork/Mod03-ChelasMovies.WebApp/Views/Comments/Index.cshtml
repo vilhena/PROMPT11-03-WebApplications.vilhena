@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Mod03_ChelasMovies.DomainModel.Comment>
+﻿@model IEnumerable<Mod03_ChelasMovies.DomainModel.Domain.Comment>
 
 @{
     ViewBag.Title = "Index";
@@ -31,7 +31,7 @@
             @item.Description
         </td>
         <td>
-            @item.MovieID
+            @item.Movie.ID
         </td>
     </tr>
 }

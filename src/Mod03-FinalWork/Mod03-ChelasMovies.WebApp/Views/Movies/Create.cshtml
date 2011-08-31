@@ -1,4 +1,4 @@
-﻿@model Mod03_ChelasMovies.DomainModel.Movie
+﻿@model Mod03_ChelasMovies.DomainModel.Domain.Movie
 
 @{
     ViewBag.Title = "Create";
@@ -70,10 +70,13 @@
             @Html.ValidationMessageFor(model => model.Runtime)
         </div>
 
+        
         <p>
-            
-            <input type="submit" value="Create" />
-            
+            <input type="submit" value="Fill" name="fill" />
+        </p>
+
+        <p>
+            <input type="submit" value="Create" /> 
         </p>
     </fieldset>
 }

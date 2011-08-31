@@ -1,0 +1,16 @@
+﻿@model ICollection<Mod03_ChelasMovies.DomainModel.Domain.Comment>
+<fieldset>
+    <legend>Comments</legend>
+    @foreach (var c in Model)
+    {
+        <div class="display-label">
+            Description</div>
+        <div class="display-field">@c.Description</div>
+
+        <div class="display-label">
+            Rating</div>
+        <div class="display-field">@c.Rating</div>
+        
+        @Html.ActionLink("Delete", "DeleteComment", new { movieid = c.Movie.ID, id = c.ID })
+    }
+</fieldset>

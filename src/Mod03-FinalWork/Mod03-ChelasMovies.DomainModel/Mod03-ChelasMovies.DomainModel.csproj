@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dynamic">
+      <HintPath>..\..\packages\DynamicQuery.1.0\lib\35\Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
@@ -52,14 +55,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comment.cs" />
+    <Compile Include="Domain\Comment.cs" />
+    <Compile Include="Domain\DomainBase.cs" />
+    <Compile Include="Domain\Group.cs" />
+    <Compile Include="Domain\ACL.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="ServicesImpl\InMemoryCommentsService.cs" />
+    <Compile Include="ServicesImpl\WallService.cs" />
+    <Compile Include="ServicesImpl\InMemoryACLService.cs" />
+    <Compile Include="ServicesImpl\InMemoryGroupsService.cs" />
+    <Compile Include="ServicesImpl\InMemoryUsersService.cs" />
     <Compile Include="ServicesImpl\InMemoryMoviesService.cs" />
+    <Compile Include="ServicesImpl\RepositoryACLService.cs" />
+    <Compile Include="ServicesImpl\RepositoryCommentsService.cs" />
+    <Compile Include="ServicesImpl\RepositoryGroupService.cs" />
     <Compile Include="ServicesImpl\RepositoryMoviesService.cs" />
+    <Compile Include="ServicesImpl\RepositoryService.cs" />
+    <Compile Include="ServicesImpl\RepositoryUserService.cs" />
+    <Compile Include="ServicesRepositoryImpl\DBContext.cs" />
+    <Compile Include="ServicesRepositoryInterfaces\IGroupsRepository.cs" />
+    <Compile Include="ServicesRepositoryInterfaces\IUsersRepository.cs" />
+    <Compile Include="ServicesRepositoryInterfaces\IACLsRepository.cs" />
+    <Compile Include="ServicesRepositoryInterfaces\ICommentsRepository.cs" />
     <Compile Include="ServicesRepositoryInterfaces\IMoviesRepository.cs" />
+    <Compile Include="Services\IWallService.cs" />
+    <Compile Include="Services\IACLService.cs" />
+    <Compile Include="Services\ICommentsService.cs" />
+    <Compile Include="Services\IGroupService.cs" />
     <Compile Include="Services\IMoviesService.cs" />
-    <Compile Include="Movie.cs" />
-    <Compile Include="MovieDBContext.cs" />
+    <Compile Include="Domain\Movie.cs" />
+    <Compile Include="ServicesRepositoryImpl\MovieDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Views\WallItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -69,6 +98,9 @@
       <Project>{FA74EFA3-B6B4-4795-8132-3829F9A7171C}</Project>
       <Name>Mod03-ChelasMovies.Rep %28FinalWork\Repositories\Mod03-ChelasMovies.Rep%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dynamic Expressions.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

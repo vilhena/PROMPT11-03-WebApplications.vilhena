@@ -1,15 +1,15 @@
-﻿@model IEnumerable<Mod03_ChelasMovies.DomainModel.Movie>
+﻿@using Mod03_ChelasMovies.WebApp.Models
+@model IEnumerable<Mod03_ChelasMovies.DomainModel.Domain.Movie>
 
 @{
     ViewBag.Title = "Index";
 }
-<div class="post">
-<h2 class="title">Index</h2>
-<p class="meta">
+
+<h2>Index</h2>
+
+<p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<div style="clear: both;">&nbsp;</div>
-<div class="entry">
 <table>
     <tr>
         <th>&nbsp;</th>
@@ -57,7 +57,7 @@
             @item.Actors
         </td>
         <td>
-            @item.Image
+            <div class="display-image-list">@Html.ImageLink(@item.Image, @item.Title)</div>
         </td>
         <td>
             @item.Runtime
@@ -66,6 +66,4 @@
 }
 
 </table>
-</div>
-</div>
 

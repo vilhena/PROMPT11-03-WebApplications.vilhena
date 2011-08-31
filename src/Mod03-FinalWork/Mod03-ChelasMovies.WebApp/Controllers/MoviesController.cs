@@ -1,48 +1,37 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using Mod03_ChelasMovies.DomainModel;
 using Mod03_ChelasMovies.DomainModel.Services;
+using Mod03_ChelasMovies.DomainModel.Domain;
 
 namespace Mod03_ChelasMovies.WebApp.Controllers
 {
     public class MoviesController : Controller
     {
         private readonly IMoviesService _moviesService;
-
-        public MoviesController(IMoviesService moviesService)
+        private readonly IUserService _userService;
+        
+        public MoviesController(IMoviesService moviesService, IUserService userService)
         {
             _moviesService = moviesService;
+            _userService = userService;
         }
 
         //
         // GET: /Movies/
         public ActionResult Index()
         {
-            //var tittle = "teste";
-            //int? year = 2010;
-
-
-            //dynamic what = new dynamic();
-
-            //if (tittle != null)
-            //    what.Tittle = tittle;
-
-            //if (year != null)
-            //    what.year = year;
-            
-
-            //_moviesService.GetAllMovies().Where(m => m==null);
-            return View(_moviesService.GetAllMovies());
+            return View(_moviesService.GetMyMovies(User.Identity.Name));
         }
 
 
         public ActionResult Details(int id)
         {
 
-            Movie movie = _moviesService.Get(id);
+            Movie movie = _moviesService.GetWithComments(id);
             if(movie == null)
             {
+                //return RedirectToAction("Index");
                 return View("NotFound", id);
             }
             return View(movie);
@@ -53,11 +42,22 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
             return View();
         }
 
+
+
         [HttpPost]
-        public ActionResult Create(Movie newMovie)
+        public ActionResult Create(string Title, string fill)
         {
+
+            if (!string.IsNullOrEmpty(fill))
+            {
+                return View(_moviesService.Search(Title));
+            }
+
+            var newMovie = new Movie();
+            TryUpdateModel(newMovie);
             if (ModelState.IsValid)
             {
+                newMovie.Owner = _userService.GetAuthenticatedUser(User.Identity.Name);
                 _moviesService.Add(newMovie);
                 return RedirectToAction("Details", new { id = newMovie.ID });
             }
@@ -67,9 +67,54 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
             }
         }
 
+        public ActionResult Edit(int id)
+        {
+            return View(_moviesService.Get(id));
+        }
+
+        [HttpPost]
+        [ActionName("Edit")]
+        public ActionResult EditPost(int id, string fill)
+        {
+            var oldMovie = _moviesService.Get(id);
+            TryUpdateModel(oldMovie);
+            ModelState.Clear();
+
+            if (!string.IsNullOrEmpty(fill))
+            {
+                _moviesService.Fill(oldMovie);
+                return View(oldMovie);
+            }
+
+            if (ModelState.IsValid)
+            {
+                _moviesService.Update(oldMovie);
+                return RedirectToAction("Details", new {id = id});
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Movie movie = _moviesService.Get(id);
+            if (movie == null)
+            {
+                //return RedirectToAction("Index");
+                return View("NotFound", id);
+            }
+            else
+            {
+                _moviesService.Delete(id);
+            }
+            return RedirectToAction("Index", new { });
+        }
+
         public ActionResult CreateComment(int movieId)
         {
-            Comment c = new Comment {MovieID = movieId};
+            Comment c = new Comment {Movie = _moviesService.Get(movieId)};
             return View(c);
         }
 
@@ -79,10 +124,12 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
             try
             {
                 if (ModelState.IsValid) {
-                    Movie movie = _moviesService.Get(c.MovieID);
+                    Movie movie = _moviesService.Get(c.Movie.ID);
+                    c.Movie = movie;
                     movie.Comments.Add(c);
+                    c.Owner = _userService.GetAuthenticatedUser(User.Identity.Name);
                     _moviesService.Update(movie);
-                    return RedirectToRoute("Default", new { action = "Details", id = c.MovieID });
+                    return RedirectToRoute("Default", new { action = "Details", id = c.Movie.ID });
                 }
             }
             catch (Exception e)
@@ -91,6 +138,13 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
             }
 
             return View(c);
+        }
+
+
+        public ActionResult DeleteComment(int movieid, int id)
+        {
+            _moviesService.DeleteComment(movieid, id);
+            return RedirectToAction("Edit", new { id = movieid});
         }
     }
 }

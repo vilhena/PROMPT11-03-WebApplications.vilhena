@@ -7,6 +7,7 @@ namespace Mod03_WebApplications.DemoMVC3WebApp.Tests.Controllers
     using NUnit.Framework;
 
     using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+    using Mod03_ChelasMovies.DomainModel.ServicesImpl;
 
     [TestFixture]
     public class HomeControllerTest
@@ -15,7 +16,7 @@ namespace Mod03_WebApplications.DemoMVC3WebApp.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(new WallService(new InMemoryMoviesService(), new InMemoryCommentsService()));
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -28,7 +29,7 @@ namespace Mod03_WebApplications.DemoMVC3WebApp.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(new WallService(new InMemoryMoviesService(), new InMemoryCommentsService()));
 
             // Act
             ViewResult result = controller.About() as ViewResult;

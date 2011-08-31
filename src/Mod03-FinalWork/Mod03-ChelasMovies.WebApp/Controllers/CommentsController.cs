@@ -3,17 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Mod03_ChelasMovies.DomainModel.Domain;
+using Mod03_ChelasMovies.DomainModel.Services;
+using Mod03_ChelasMovies.WebApp.Models;
 
 namespace Mod03_ChelasMovies.WebApp.Controllers
 {
     public class CommentsController : Controller
     {
+        private readonly ICommentsService _CommentsService;
+        private readonly IMoviesService _moviesService;
+        private readonly IUserService _userService;
+
+        public CommentsController(ICommentsService commentsService, IMoviesService moviesService, IUserService userService)
+        {
+            _CommentsService = commentsService;
+            _moviesService = moviesService;
+            _userService = userService;
+        }
+
         //
         // GET: /Comments/
 
-        public ActionResult Index()
+        public ActionResult Index(int movieId)
         {
-            return View();
+            var comment = _CommentsService.Search("Movie.Id = " + movieId, 0, 0, "");
+
+            return View(new CommentsModel()
+            {
+                MovieID = movieId
+            });
         }
 
         //
@@ -21,33 +40,55 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            var comment = _CommentsService.Get(id);
+            return View(new CommentsModel()
+            {
+                MovieID = comment.Movie.ID,
+                ID = comment.ID,
+                Description = comment.Description,
+                Rating = comment.Rating,
+                LastUpdated = comment.LastUpdated
+            });
         }
 
         //
         // GET: /Comments/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int movieId)
         {
-            return View();
+            var newComment = new CommentsModel()
+            {
+                MovieID = movieId
+            };
+            return View(newComment);
         } 
 
         //
         // POST: /Comments/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CommentsModel c)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var newComment = new Comment();
+                    TryUpdateModel(newComment);
+                    Movie movie = _moviesService.Get(c.MovieID);
+                    newComment.Movie = movie;
+                    newComment.Owner = _userService.GetAuthenticatedUser(User.Identity.Name);
+                    _CommentsService.Add(newComment);
 
-                return RedirectToAction("Index");
+                    return RedirectToRoute("Default", new { controller = "Movies" , action = "Details", id = c.MovieID });
+                }
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                ModelState.AddModelError("", String.Format("Edit Failure, inner exception: {0}", e));
             }
+
+            return View(c);
         }
         
         //

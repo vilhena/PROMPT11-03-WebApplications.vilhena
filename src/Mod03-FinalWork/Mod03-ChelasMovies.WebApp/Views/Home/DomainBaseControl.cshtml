@@ -1,0 +1,54 @@
+﻿@using Mod03_ChelasMovies.WebApp.Models
+@using Mod03_ChelasMovies.DomainModel.Domain
+
+@model Mod03_ChelasMovies.DomainModel.Domain.DomainBase
+
+
+@if (Model.GetType().BaseType == typeof(Movie))
+{
+    var movie = (Movie)Model;
+    <table>
+    <tr>
+        <td>
+            @movie.LastUpdated
+        </td>
+        <td>
+            @movie.Owner.NickName
+        </td>
+        <td>
+            @movie.Title
+        </td>
+        <td>
+            <div class="display-image-list">@Html.ImageLink(movie.Image, movie.Title)</div>
+        </td>
+    </tr>
+    </table>
+}
+
+@if (Model.GetType() == typeof(Comment))
+{
+    var comment = (Comment)Model;
+    <table>
+    <tr>
+        <td>
+            @comment.Owner.NickName
+        </td>
+        <td>
+            @comment.LastUpdated
+        </td>
+        <td>
+            @comment.Movie.Title
+        </td>
+        
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            @comment.Description
+        </td>
+        <td>
+            @comment.Rating
+        </td>
+    </tr>
+    </table>
+}

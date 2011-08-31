@@ -1,4 +1,6 @@
-﻿@model Mod03_ChelasMovies.DomainModel.Comment
+﻿@using Mod03_ChelasMovies.WebApp.Models
+@using Mod03_ChelasMovies.DomainModel.Domain
+@model Mod03_ChelasMovies.DomainModel.Domain.Comment
 
 @{
     ViewBag.Title = "CreateComment";
@@ -26,10 +28,19 @@
             @Html.LabelFor(model => model.Rating)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Rating)
-            @Html.ValidationMessageFor(model => model.Rating)
+            @*@Html.DropDownList("Rating", 
+            new List<SelectListItem>() { 
+                new SelectListItem() { Text = "1", Selected = false, Value = "1" }
+                , new SelectListItem() { Text = "2", Selected = false, Value = "2" }
+                , new SelectListItem() { Text = "3", Selected = true, Value = "3" } 
+                , new SelectListItem() { Text = "4", Selected = false, Value = "4" }
+                , new SelectListItem() { Text = "5", Selected = false, Value = "5" }   
+            })*@
+            @Html.EnumDropdownList("Rating",Model.Rating,  Rating.Ratinng3)
+            @*@Html.EditorFor(model => model.Rating)*@
+            @*@Html.ValidationMessageFor(model => model.Rating)*@
         </div>
-            @Html.HiddenFor(model => model.MovieID)
+            @Html.HiddenFor(model => model.Movie.ID)
         <p>
             <input type="submit" value="Create" />
         </p>

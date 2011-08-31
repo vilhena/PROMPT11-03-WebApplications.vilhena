@@ -59,20 +59,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountControllerTest.cs" />
+    <Compile Include="Controllers\CommentsControllerTest.cs" />
+    <Compile Include="Controllers\GroupControllerTest.cs" />
+    <Compile Include="Controllers\MoviesControllerTest.cs" />
     <Compile Include="Controllers\UrlTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Services\AccountTests.cs" />
+    <Compile Include="Services\CommentsTests.cs" />
+    <Compile Include="Services\GroupsTests.cs" />
+    <Compile Include="Services\MoviesTests.cs" />
     <Compile Include="Utils\TestHttpContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mod03-ChelasMovies.DomainModel\Mod03-ChelasMovies.DomainModel.csproj">
+      <Project>{E8ED56F3-9127-43CD-91BA-B884D9B93D27}</Project>
+      <Name>Mod03-ChelasMovies.DomainModel %28FinalWork\Mod03-ChelasMovies.DomainModel%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mod03-ChelasMovies.WebApp\Mod03-ChelasMovies.WebApp.csproj">
       <Project>{3FE3BEF6-2D44-4885-94FE-9E5746E4BB7E}</Project>
       <Name>Mod03-ChelasMovies.WebApp %28FinalWork\Mod03-ChelasMovies.WebApp%29</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

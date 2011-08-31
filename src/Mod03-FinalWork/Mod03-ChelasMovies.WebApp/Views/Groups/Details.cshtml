@@ -1,0 +1,35 @@
+﻿@model Mod03_ChelasMovies.WebApp.Models.GroupDevailsModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>GroupDevailsModel</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Read</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Read)
+    </div>
+
+    <div class="display-label">Change</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Change)
+    </div>
+
+    <div class="display-label">Delete</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Delete)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

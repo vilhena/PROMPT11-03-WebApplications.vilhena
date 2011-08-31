@@ -12,6 +12,7 @@ using Mod03_ChelasMovies.WebApp.Models;
 namespace Mod03_ChelasMovies.WebApp
 {
     using System.Data.Entity;
+    using Mod03_ChelasMovies.DomainModel.ServicesRepositoryImpl;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -48,6 +49,8 @@ namespace Mod03_ChelasMovies.WebApp
             Database.SetInitializer(new MoviesInitializer());
             AppStart_Structuremap.Start();
             Database.SetInitializer<MovieDbContext>(new MoviesInitializer());
+            //Database.SetInitializer<GroupDbContext>(new GroupsInitializer());
+            //Database.SetInitializer<UserDbContext>(new UsersInitializer());
 
 
             AreaRegistration.RegisterAllAreas();

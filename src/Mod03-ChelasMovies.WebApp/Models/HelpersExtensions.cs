@@ -19,24 +19,21 @@ namespace Mod03_ChelasMovies.WebApp.Models
             return MvcHtmlString.Create(imageBuild.ToString());
         }
 
-        public static MvcHtmlString EnumDropdownList<T>(this HtmlHelper htmlHelper, string name, T enumerate, object selectedValue)
-            where T : struct
+        public static MvcHtmlString EnumDropdownList(this HtmlHelper htmlHelper, string name, Type enumerateType, object selectedValue)
         {
-            var TType = typeof (T);
-
-            if (!TType.IsEnum)
+            if (!enumerateType.IsEnum)
                 throw new InvalidOperationException("Invalid Enumerator Type");
 
            
             var enumList = new List<SelectListItem>();
-            
-            for (int i = 0; i < TType.GetEnumNames().Count(); i++)
+
+            for (int i = 0; i < enumerateType.GetEnumNames().Count(); i++)
             {
                 var option = new SelectListItem
                                  {
-                                     Value = ((int) TType.GetEnumValues().GetValue(i)).ToString(),
-                                     Text = TType.GetEnumNames()[i],
-                                     Selected = (TType.GetEnumValues().GetValue(i).Equals(selectedValue))
+                                     Value = ((int)enumerateType.GetEnumValues().GetValue(i)).ToString(),
+                                     Text = enumerateType.GetEnumNames()[i],
+                                     Selected = (enumerateType.GetEnumValues().GetValue(i).Equals(selectedValue))
                                  };
 
                 enumList.Add(option);

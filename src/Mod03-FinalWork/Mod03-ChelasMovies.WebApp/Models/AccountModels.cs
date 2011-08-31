@@ -63,5 +63,10 @@ namespace Mod03_ChelasMovies.WebApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string NickName { get; set; }
     }
 }
