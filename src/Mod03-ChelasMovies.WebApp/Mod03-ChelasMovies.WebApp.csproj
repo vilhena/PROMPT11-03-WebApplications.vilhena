@@ -161,11 +161,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Mod03-ChelasMovies.DependencyResolution\Mod03-ChelasMovies.DependencyResolution.csproj">
       <Project>{D1F54503-1D69-47BD-90E1-4F5353E1BDF6}</Project>
-      <Name>Mod03-ChelasMovies.DependencyResolution</Name>
+      <Name>Mod03-ChelasMovies.DependencyResolution %28Sessão4\Assignments\Mod03-ChelasMovies.DependencyResolution%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mod03-ChelasMovies.DomainModel\Mod03-ChelasMovies.DomainModel.csproj">
       <Project>{208B1EAA-EBE5-4202-891D-3D32A0DAE1E3}</Project>
-      <Name>Mod03-ChelasMovies.DomainModel</Name>
+      <Name>Mod03-ChelasMovies.DomainModel %28Sessão4\Assignments\Mod03-ChelasMovies.DomainModel%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

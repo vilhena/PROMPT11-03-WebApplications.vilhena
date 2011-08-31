@@ -52,11 +52,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Mod03-ChelasMovies.DomainModel\Mod03-ChelasMovies.DomainModel.csproj">
       <Project>{208B1EAA-EBE5-4202-891D-3D32A0DAE1E3}</Project>
-      <Name>Mod03-ChelasMovies.DomainModel</Name>
+      <Name>Mod03-ChelasMovies.DomainModel %28Sessão4\Assignments\Mod03-ChelasMovies.DomainModel%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mod03-ChelasMovies.Rep\Mod03-ChelasMovies.Rep.csproj">
       <Project>{1C039CE6-EB9A-4748-BF01-B8B371443591}</Project>
-      <Name>Mod03-ChelasMovies.Rep</Name>
+      <Name>Mod03-ChelasMovies.Rep %28Sessão4\Assignments\Repositories\Mod03-ChelasMovies.Rep%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

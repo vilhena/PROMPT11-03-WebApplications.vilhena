@@ -63,7 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="CommentDbContext.cs" />
     <Compile Include="DBContext.cs" />
@@ -87,7 +86,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Mod03-ChelasMovies.Rep\Mod03-ChelasMovies.Rep.csproj">
       <Project>{1C039CE6-EB9A-4748-BF01-B8B371443591}</Project>
-      <Name>Mod03-ChelasMovies.Rep</Name>
+      <Name>Mod03-ChelasMovies.Rep %28Sessão4\Assignments\Repositories\Mod03-ChelasMovies.Rep%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,22 +8,16 @@ namespace Mod03_ChelasMovies.WebApp.Controllers
     public class MoviesController : Controller
     {
         private readonly IMoviesService _moviesService;
-        private readonly IService<Actor> _actorService; 
-
-        public MoviesController(IMoviesService moviesService, IService<Actor> actorService)
+        
+        public MoviesController(IMoviesService moviesService)
         {
             _moviesService = moviesService;
-            _actorService = actorService;
         }
 
         //
         // GET: /Movies/
         public ActionResult Index()
         {
-            //_actorService.Add(new Actor() {Name = "Julia"});
-            //_actorService.Add(new Actor() { Name = "Daniel" });
-
-            var x = _actorService.GetAll();
             return View(_moviesService.GetAllMovies());
         }
 

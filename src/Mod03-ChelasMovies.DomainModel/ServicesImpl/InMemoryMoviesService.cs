@@ -51,26 +51,26 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
                                    new Comment
                                        {
                                            Description = "Description 1",
-                                           Rating = 3,
+                                           Rating = Rating.Ratinng3,
                                            Movie = movies[0]
                                        },
                                    new Comment
                                        {
                                            Description = "Description 2",
-                                           Rating = 4,
+                                           Rating = Rating.Ratinng4,
                                            Movie = movies[0]
                                        },
 
                                    new Comment
                                        {
                                            Description = "Description 3",
-                                           Rating = 5,
+                                           Rating = Rating.Ratinng5,
                                            Movie = movies[1]
                                        },
                                        new Comment
                                        {
                                            Description = "Description 4",
-                                           Rating = 4,
+                                           Rating = Rating.Ratinng4,
                                            Movie = movies[1]
                                        },
 

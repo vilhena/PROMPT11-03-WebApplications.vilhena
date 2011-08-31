@@ -16,29 +16,29 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
             _repository = repository;
         }
 
-        public ICollection<T> GetAll()
+        public virtual ICollection<T> GetAll()
         {
             return _repository.GetAll().ToList();
         }
 
-        public T Get(int id)
+        public virtual T Get(int id)
         {
             return _repository.Get(id);
         }
 
 
-        public void Add(T entity)
+        public virtual void Add(T entity)
         {
             _repository.Add(entity);
             _repository.Save();
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _repository.Save();
         }
 
-        public void Delete(int id)
+        public virtual void Delete(int id)
         {
             try
             {
@@ -47,12 +47,12 @@ namespace Mod03_ChelasMovies.DomainModel.ServicesImpl
             }
             catch (Exception e)
             {
-                throw new ArgumentException(String.Format("Movie with id {0} could not be found", id), "id", e);
+                throw new ArgumentException(String.Format("id {0} could not be found", id), "id", e);
             }
 
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _repository.Dispose();
         }
